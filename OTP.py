@@ -4,7 +4,7 @@ import random
 app = Flask(__name__)
 app.secret_key = 'secret_key_here'
 
-my_phone_number = '0868386258'
+my_phone_number = '1234567890'
 
 def generate_otp(length: int = 6) -> str:
     otp = ''.join([str(random.randint(0, 9)) for i in range(length)])
