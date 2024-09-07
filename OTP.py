@@ -1,4 +1,5 @@
 from flask import Flask, request, session, render_template_string
+import pyotp
 import random
 
 app = Flask(__name__)
@@ -6,9 +7,10 @@ app.secret_key = 'secret_key_here'
 
 my_phone_number = '1234567890'
 
-def generate_otp(length: int = 6) -> str:
-    otp = ''.join([str(random.randint(0, 9)) for i in range(length)])
-    return otp
+def generate_otp() -> str:
+    totp = pyotp.TOTP('base32secret3232')
+    otp_code = totp.now()
+    return otp_code
 
 def send_otp(phone_number: str, otp: str) -> bool:
     if phone_number == my_phone_number:
